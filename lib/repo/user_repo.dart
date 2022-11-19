@@ -13,4 +13,27 @@ class UserRepository {
       rethrow;
     }
   }
+
+  List<UserModel> results = [];
+  Future<List<UserModel>> getuserList({String? query}) async {
+    try {
+      Response response = await api.sendRequest.get("/user");
+      if (response.statusCode == 200) {
+        List<dynamic> userMaps = response.data;
+        results =
+            userMaps.map((userMap) => UserModel.fromJson(userMap)).toList();
+        if (query != null) {
+          results = results
+              .where((element) =>
+                  element.name!.toLowerCase().contains((query.toLowerCase())))
+              .toList();
+        }
+      } else {
+        print("fetch error");
+      }
+    } catch (ex) {
+      rethrow;
+    }
+    return results;
+  }
 }
