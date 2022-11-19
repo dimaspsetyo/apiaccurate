@@ -22,7 +22,7 @@ class _AddUserState extends State<AddUser> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/home');
+            Navigator.pop(context, '/home');
           },
           icon: const Icon(Icons.arrow_back_ios),
           //replace with our own icon data.
