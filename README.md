@@ -1,15 +1,40 @@
-# apiaccurate
+# APIACCURATE
 
-A new Flutter project.
+[Image]
+<p float="left">
+  <img src="[https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2Fzipper-studios%2Fflutter-fetch-data-from-api-and-architect-your-app-using-bloc-pattern-b826f80d6996&psig=AOvVaw3XjjQSFbUxghr4xe1mQOvT&ust=1668950588616000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCMCH0sOruvsCFQAAAAAdAAAAABAE] />
+</p>
 
-## Getting Started
+This repository containing Flutter API POST & GET data.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
+- Sorting Ascending/Descending
+<p float="left">
+  <img src="[(https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/sort.jpeg)]"  />
+</p>
+- Searching
+<p float="left">
+  <img src="[(https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/search.jpeg)]"  />
+</p>
+- POST API
+<p float="left">
+  <img src="[(https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/post.jpeg)]"  />
+</p>
+- GET API
+<p float="left">
+  <img src="[(https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/float.jpeg)]"  />
+</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Package Uses
+- flutter_bloc (https://pub.dev/packages/flutter_bloc)
+- dio (https://pub.dev/packages/dio)
+- pretty_dio_logger (https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta-1)
+                                                                                    
+#### Running apps
+- $ flutter pub get
+- $ flutter run                                                                                  
+
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
