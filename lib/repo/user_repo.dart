@@ -29,6 +29,7 @@ class UserRepository {
               .toList();
         }
       } else {
+        // ignore: avoid_print
         print("fetch error");
       }
     } catch (ex) {

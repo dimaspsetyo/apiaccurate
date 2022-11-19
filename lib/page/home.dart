@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isDescending = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +48,25 @@ class _HomePageState extends State<HomePage> {
             }
 
             if (state is UserLoadedState) {
-              return buildUserListView(state.users);
+              return Column(
+                children: [
+                  TextButton.icon(
+                    icon: const RotatedBox(
+                      quarterTurns: 1,
+                      child: Icon(Icons.compare_arrows, size: 38),
+                    ),
+                    label: Text(
+                      isDescending ? 'Descending' : 'Ascending',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    onPressed: () =>
+                        setState(() => isDescending = !isDescending),
+                  ),
+                  Expanded(
+                    child: buildUserListView(state.users),
+                  ),
+                ],
+              );
             }
 
             return const Center(
@@ -63,7 +83,8 @@ class _HomePageState extends State<HomePage> {
       return ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
-          UserModel user = users[index];
+          final sortedUsers = isDescending ? users.reversed.toList() : users;
+          UserModel user = sortedUsers[index];
 
           return Card(
               child: Padding(
