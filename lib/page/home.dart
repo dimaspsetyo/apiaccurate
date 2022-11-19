@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               showSearch(context: context, delegate: SearchUser());
             },
             icon: const Icon(Icons.search_sharp),
-          )
+          ),
         ],
       ),
       body: SafeArea(
@@ -74,6 +74,17 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => Navigator.pushNamed(context, '/add_user'),
+        foregroundColor: Colors.black,
+        backgroundColor: const Color(0xff03dac6),
+        autofocus: true,
+        elevation: 50,
+        highlightElevation: 50,
+        label: const Text('ADD'),
+        icon: const Icon(Icons.add),
       ),
     );
   }

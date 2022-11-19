@@ -13,7 +13,7 @@ class SearchUser extends SearchDelegate {
           onPressed: () {
             query = '';
           },
-          icon: const Icon(Icons.close))
+          icon: const Icon(Icons.delete_sweep_rounded))
     ];
   }
 
@@ -48,7 +48,7 @@ class SearchUser extends SearchDelegate {
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.blueAccent,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
@@ -91,7 +91,7 @@ class SearchUser extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     return const Center(
-      child: Text('Ketikkan Nama atau Kota'),
+      child: Text('Ketikkan Nama User'),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apiaccurate/page/home.dart';
+import 'package:apiaccurate/page/add_user.dart';
 import 'package:apiaccurate/logic/cubits/user_cubit.dart';
 
 void main() async {
@@ -16,9 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UserCubit(),
-      child: const MaterialApp(
+      child: MaterialApp(
+        routes: {
+          '/home': (context) => const HomePage(),
+          '/add_user': (context) => const AddUser(),
+        },
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: const HomePage(),
       ),
     );
   }

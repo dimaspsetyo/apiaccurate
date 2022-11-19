@@ -37,4 +37,25 @@ class UserRepository {
     }
     return results;
   }
+
+  Future postUser(String name, String address, String email, String phoneNumber,
+      String city) async {
+    try {
+      Response response = await api.sendRequest.post("/user", data: {
+        "name": name,
+        "address": address,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "city": city
+      });
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (ex) {
+      rethrow;
+    }
+  }
 }
