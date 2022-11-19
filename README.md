@@ -26,12 +26,12 @@ This repository containing Flutter API POST & GET data.
   <img src="[(https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/float.jpeg)]"  />
 </p>
 
-### Package Uses
+## Package Uses
 - flutter_bloc (https://pub.dev/packages/flutter_bloc)
 - dio (https://pub.dev/packages/dio)
 - pretty_dio_logger (https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta-1)
                                                                                     
-#### Running apps
+## Running apps
 - $ flutter pub get
 - $ flutter run                                                                                  
 
