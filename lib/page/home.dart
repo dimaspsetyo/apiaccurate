@@ -83,7 +83,11 @@ class _HomePageState extends State<HomePage> {
       return ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
-          final sortedUsers = isDescending ? users.reversed.toList() : users;
+          final sortedUsers = users
+            ..sort((user1, user2) => isDescending
+                ? user2.name.toString().compareTo(user1.name.toString())
+                : user1.name.toString().compareTo(user2.name.toString()));
+
           UserModel user = sortedUsers[index];
 
           return Card(
@@ -99,6 +103,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    /* Untuk menampilkan id*/
                     child: Center(
                       child: Text(
                         user.id.toString(),
@@ -139,6 +144,7 @@ class _HomePageState extends State<HomePage> {
         },
       );
     }
+
     return const Center(child: Text("Data belum tersedia..."));
   }
 }
