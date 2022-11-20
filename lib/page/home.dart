@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:apiaccurate/models/user_model.dart';
 import 'package:apiaccurate/widget/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apiaccurate/logic/cubits/user_state.dart';
 import 'package:apiaccurate/logic/cubits/user_cubit.dart';
+import 'package:swipe_refresh/swipe_refresh.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +16,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = StreamController<SwipeRefreshState>.broadcast();
+
+  Stream<SwipeRefreshState> get _stream => _controller.stream;
+
   bool isDescending = false;
 
   @override
@@ -94,7 +101,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildUserListView(List<UserModel> users) {
     if (users.isNotEmpty) {
-      return ListView.builder(
+      return SwipeRefresh.builder(
+        stateStream: _stream,
+        onRefresh: _refresh,
+        padding: const EdgeInsets.symmetric(vertical: 10),
         itemCount: users.length,
         itemBuilder: (context, index) {
           final sortedUsers = users
@@ -160,5 +170,18 @@ class _HomePageState extends State<HomePage> {
     }
 
     return const Center(child: Text("Data belum tersedia..."));
+  }
+
+  @override
+  void dispose() {
+    _controller.close();
+
+    super.dispose();
+  }
+
+  Future<void> _refresh() async {
+    await Future<void>.delayed(const Duration(seconds: 3));
+    // when all needed is done change state
+    _controller.sink.add(SwipeRefreshState.hidden);
   }
 }
