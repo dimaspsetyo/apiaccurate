@@ -22,6 +22,21 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Accurate API"),
         actions: [
           IconButton(
+            icon: const RotatedBox(
+              quarterTurns: 1,
+              child: Icon(
+                Icons.compare_arrows,
+                size: 25,
+                color: Colors.white,
+              ),
+            ),
+            // label: Text(
+            //   isDescending ? 'Descending' : 'Ascending',
+            //   style: const TextStyle(fontSize: 12, color: Colors.white),
+            // ),
+            onPressed: () => setState(() => isDescending = !isDescending),
+          ),
+          IconButton(
             onPressed: () {
               showSearch(context: context, delegate: SearchUser());
             },
@@ -50,18 +65,6 @@ class _HomePageState extends State<HomePage> {
             if (state is UserLoadedState) {
               return Column(
                 children: [
-                  TextButton.icon(
-                    icon: const RotatedBox(
-                      quarterTurns: 1,
-                      child: Icon(Icons.compare_arrows, size: 38),
-                    ),
-                    label: Text(
-                      isDescending ? 'Descending' : 'Ascending',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    onPressed: () =>
-                        setState(() => isDescending = !isDescending),
-                  ),
                   Expanded(
                     child: buildUserListView(state.users),
                   ),
@@ -78,7 +81,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.pushReplacementNamed(context, '/add_user'),
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.white,
         backgroundColor: const Color(0xff03dac6),
         autofocus: true,
         elevation: 50,
