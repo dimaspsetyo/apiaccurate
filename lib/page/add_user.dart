@@ -49,7 +49,9 @@ class _AddUserState extends State<AddUser> {
                     return null;
                   },
                   controller: _nameController,
+                  maxLength: 30,
                   decoration: const InputDecoration(
+                      counterText: '',
                       prefixIcon: Icon(
                         Icons.person,
                         color: Colors.blueAccent,
@@ -69,7 +71,9 @@ class _AddUserState extends State<AddUser> {
                     return null;
                   },
                   controller: _addressController,
+                  maxLength: 70,
                   decoration: const InputDecoration(
+                      counterText: '',
                       prefixIcon: Icon(
                         Icons.home_filled,
                         color: Colors.blueAccent,
@@ -90,7 +94,9 @@ class _AddUserState extends State<AddUser> {
                   },
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
+                  maxLength: 30,
                   decoration: const InputDecoration(
+                      counterText: '',
                       prefixIcon: Icon(
                         Icons.email_rounded,
                         color: Colors.blueAccent,
@@ -110,8 +116,10 @@ class _AddUserState extends State<AddUser> {
                     return null;
                   },
                   controller: _phoneNumberController,
+                  maxLength: 12,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
+                      counterText: '',
                       prefixIcon: Icon(
                         Icons.phone_android,
                         color: Colors.blueAccent,
@@ -169,7 +177,8 @@ class _AddUserState extends State<AddUser> {
                         }
                       }
                     },
-                    child: const Text('Submit Data')),
+                    child: const Text('Submit Data',
+                        style: TextStyle(fontSize: 15))),
               ),
             ],
           ),
