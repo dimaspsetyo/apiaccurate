@@ -1,15 +1,35 @@
-# apiaccurate
+# APIACCURATE
 
-A new Flutter project.
+This repository containing Flutter API POST & GET data.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
+Sorting Ascending/Descending
+<p float="center">
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/sort.jpeg" width="200" />
+</p>
+Searching
+<p float="center">
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/search.jpeg" width="200" />
+</p>
+POST API
+<p float="center">
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/post.jpeg" width="200" />
+</p>
+GET API
+<p float="center">
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/get.jpeg" width="200" />
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+## Package Uses
+- flutter_bloc (https://pub.dev/packages/flutter_bloc)
+- dio (https://pub.dev/packages/dio)
+- pretty_dio_logger (https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta-1)
+                                                                                    
+## Running apps
+- $ flutter pub get
+- $ flutter run                                                                                  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
