@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apiaccurate/page/home.dart';
 import 'package:apiaccurate/page/add_user.dart';
 import 'package:apiaccurate/logic/cubits/user_cubit.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,14 @@ class MyApp extends StatelessWidget {
           '/add_user': (context) => const AddUser(),
         },
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        home: const Scaffold(
+          body: DoubleBackToCloseApp(
+            snackBar: SnackBar(
+              content: Text('Tap back again to leave'),
+            ),
+            child: HomePage(),
+          ),
+        ),
       ),
     );
   }
