@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.pushNamed(context, '/add_user'),
+        onPressed: () => Navigator.pushReplacementNamed(context, '/add_user'),
         foregroundColor: Colors.black,
         backgroundColor: const Color(0xff03dac6),
         autofocus: true,

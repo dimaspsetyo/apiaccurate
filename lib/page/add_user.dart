@@ -22,14 +22,41 @@ class _AddUserState extends State<AddUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context, '/home');
-          },
-          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+          icon: const Icon(Icons.close),
           //replace with our own icon data.
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                // If the form is valid, display a snackbar. In the real world,
+                // you'd often call a server or save the information in a database.
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Processing Data')),
+                );
+
+                bool response = await repository.postUser(
+                  _nameController.text,
+                  _addressController.text,
+                  _emailController.text,
+                  _phoneNumberController.text,
+                  _cityController.text,
+                );
+
+                if (!response) {
+                  throw ('Input Data Failed.');
+                } else {
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushReplacementNamed('/home');
+                }
+              }
+            },
+            icon: const Icon(Icons.check),
+          ),
+        ],
         title: const Text('Add User Data'),
       ),
       resizeToAvoidBottomInset: false,
@@ -40,7 +67,7 @@ class _AddUserState extends State<AddUser> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0, vertical: 16.0),
+                    horizontal: 10.0, vertical: 16.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -62,7 +89,7 @@ class _AddUserState extends State<AddUser> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0, vertical: 16.0),
+                    horizontal: 10.0, vertical: 16.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -84,7 +111,7 @@ class _AddUserState extends State<AddUser> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0, vertical: 16.0),
+                    horizontal: 10.0, vertical: 16.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -107,7 +134,7 @@ class _AddUserState extends State<AddUser> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0, vertical: 16.0),
+                    horizontal: 10.0, vertical: 16.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -130,7 +157,7 @@ class _AddUserState extends State<AddUser> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0, vertical: 16.0),
+                    horizontal: 10.0, vertical: 16.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -138,7 +165,7 @@ class _AddUserState extends State<AddUser> {
                     }
                     return null;
                   },
-                  controller: _phoneNumberController,
+                  controller: _cityController,
                   decoration: const InputDecoration(
                       prefixIcon: Icon(
                         Icons.location_city,
@@ -147,38 +174,6 @@ class _AddUserState extends State<AddUser> {
                       labelText: 'Input User City',
                       border: UnderlineInputBorder()),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-                child: ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-
-                        bool response = await repository.postUser(
-                          _nameController.text,
-                          _addressController.text,
-                          _emailController.text,
-                          _phoneNumberController.text,
-                          _cityController.text,
-                        );
-
-                        if (response) {
-                          // ignore: use_build_context_synchronously
-                          Navigator.of(context).popAndPushNamed('/home');
-                        } else {
-                          throw ('Input Data Failed.');
-                        }
-                      }
-                    },
-                    child: const Text('Submit Data',
-                        style: TextStyle(fontSize: 15))),
               ),
             ],
           ),

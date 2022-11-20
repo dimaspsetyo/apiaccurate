@@ -1,6 +1,6 @@
 import 'package:apiaccurate/models/user_model.dart';
 import 'package:apiaccurate/repo/user_repo.dart';
-import 'user_state.dart';
+import 'package:apiaccurate/logic/cubits/user_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
