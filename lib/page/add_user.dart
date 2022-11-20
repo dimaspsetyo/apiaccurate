@@ -16,10 +16,13 @@ class _AddUserState extends State<AddUser> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context, '/home');
@@ -27,73 +30,150 @@ class _AddUserState extends State<AddUser> {
           icon: const Icon(Icons.arrow_back_ios),
           //replace with our own icon data.
         ),
-        title: const Text('Tambah Data User'),
+        title: const Text('Add User Data'),
       ),
-      body: Column(
-        children: [
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Masukkan Nama';
-              }
-              return null;
-            },
-            controller: _nameController,
-            decoration: const InputDecoration(
-                hintText: 'Name', border: OutlineInputBorder()),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Masukkan Alamat';
-              }
-              return null;
-            },
-            controller: _addressController,
-            decoration: const InputDecoration(
-                hintText: 'Address', border: OutlineInputBorder()),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Masukkan Email';
-              }
-              return null;
-            },
-            controller: _emailController,
-            decoration: const InputDecoration(
-                hintText: 'Email', border: OutlineInputBorder()),
-          ),
-          TextFormField(
-            controller: _phoneNumberController,
-            decoration: const InputDecoration(
-                hintText: 'Phone Number', border: OutlineInputBorder()),
-          ),
-          TextFormField(
-            controller: _cityController,
-            decoration: const InputDecoration(
-                hintText: 'City', border: OutlineInputBorder()),
-          ),
-          ElevatedButton(
-              onPressed: () async {
-                bool response = await repository.postUser(
-                  _nameController.text,
-                  _addressController.text,
-                  _emailController.text,
-                  _phoneNumberController.text,
-                  _cityController.text,
-                );
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 50.0, vertical: 16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name cannot be empty';
+                    }
+                    return null;
+                  },
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Colors.blueAccent,
+                      ),
+                      labelText: 'Input User Name',
+                      border: UnderlineInputBorder()),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 50.0, vertical: 16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Address cannot be empty';
+                    }
+                    return null;
+                  },
+                  controller: _addressController,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.home_filled,
+                        color: Colors.blueAccent,
+                      ),
+                      labelText: 'Input User Address',
+                      border: UnderlineInputBorder()),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 50.0, vertical: 16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Email cannot be empty';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.email_rounded,
+                        color: Colors.blueAccent,
+                      ),
+                      labelText: 'Input User Email',
+                      border: UnderlineInputBorder()),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 50.0, vertical: 16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Phone number cannot be empty';
+                    }
+                    return null;
+                  },
+                  controller: _phoneNumberController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.phone_android,
+                        color: Colors.blueAccent,
+                      ),
+                      labelText: 'Input User Phone number',
+                      border: UnderlineInputBorder()),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 50.0, vertical: 16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'City cannot be empty';
+                    }
+                    return null;
+                  },
+                  controller: _phoneNumberController,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.location_city,
+                        color: Colors.blueAccent,
+                      ),
+                      labelText: 'Input User City',
+                      border: UnderlineInputBorder()),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
 
-                if (response) {
-                  const SnackBar(content: Text('Processing Data'));
-                  // ignore: use_build_context_synchronously
-                  Navigator.of(context).popAndPushNamed('/home');
-                } else {
-                  throw ('Data gagal ditambahkan.');
-                }
-              },
-              child: const Text('Tambah Data'))
-        ],
+                        bool response = await repository.postUser(
+                          _nameController.text,
+                          _addressController.text,
+                          _emailController.text,
+                          _phoneNumberController.text,
+                          _cityController.text,
+                        );
+
+                        if (response) {
+                          // ignore: use_build_context_synchronously
+                          Navigator.of(context).popAndPushNamed('/home');
+                        } else {
+                          throw ('Input Data Failed.');
+                        }
+                      }
+                    },
+                    child: const Text('Submit Data')),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
