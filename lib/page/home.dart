@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:apiaccurate/models/user_model.dart';
 import 'package:apiaccurate/widget/search_widget.dart';
+import 'package:apiaccurate/widget/add_user_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apiaccurate/logic/cubits/user_state.dart';
@@ -86,16 +87,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.pushReplacementNamed(context, '/add_user'),
-        foregroundColor: Colors.white,
-        backgroundColor: const Color(0xff03dac6),
-        autofocus: true,
-        elevation: 50,
-        highlightElevation: 50,
-        label: const Text('ADD'),
-        icon: const Icon(Icons.add),
-      ),
+      floatingActionButton: const AddUser(),
     );
   }
 
