@@ -7,19 +7,19 @@ This repository containing Flutter API POST & GET data.
 Sorting Ascending/Descending
 
 <p float="center">
-  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/sort.jpeg" width="200" />
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/assets/img/ss/sort.jpeg" width="200" />
 </p>
 Searching
 <p float="center">
-  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/search.jpeg" width="200" />
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/assets/img/ss/search.jpeg" width="200" />
 </p>
 POST API
 <p float="center">
-  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/post.jpg" width="200" />
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/assets/img/ss/post.jpg" width="200" />
 </p>
 GET API
 <p float="center">
-  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/get.jpg" width="200" />
+  <img src="https://github.com/dimaspsetyo/apiaccurate/blob/main/lib/assets/img/ss/get.jpg" width="200" />
 </p>
 
 ## Package Uses
