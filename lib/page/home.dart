@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _controller = StreamController<SwipeRefreshState>.broadcast();
 
-  Stream<SwipeRefreshState> get _stream => _controller.stream;
+  Stream<SwipeRefreshState> get stream => _controller.stream;
 
   bool isDescending = false;
 
@@ -30,18 +30,8 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Accurate API"),
         actions: [
           IconButton(
-            icon: const RotatedBox(
-              quarterTurns: 1,
-              child: Icon(
-                Icons.compare_arrows,
-                size: 25,
-                color: Colors.white,
-              ),
-            ),
-            // label: Text(
-            //   isDescending ? 'Descending' : 'Ascending',
-            //   style: const TextStyle(fontSize: 12, color: Colors.white),
-            // ),
+            icon: const Icon(Icons.sort_by_alpha),
+            color: Colors.white,
             onPressed: () => setState(() => isDescending = !isDescending),
           ),
           IconButton(
@@ -94,8 +84,8 @@ class _HomePageState extends State<HomePage> {
   Widget buildUserListView(List<UserModel> users) {
     if (users.isNotEmpty) {
       return SwipeRefresh.builder(
-        stateStream: _stream,
-        onRefresh: _refresh,
+        stateStream: stream,
+        onRefresh: refresh,
         padding: const EdgeInsets.symmetric(vertical: 10),
         itemCount: users.length,
         itemBuilder: (context, index) {
@@ -171,7 +161,7 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  Future<void> _refresh() async {
+  Future<void> refresh() async {
     await Future<void>.delayed(const Duration(seconds: 3));
     // when all needed is done change state
     _controller.sink.add(SwipeRefreshState.hidden);
