@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apiaccurate/page/home.dart';
 import 'package:apiaccurate/page/add_user.dart';
-import 'package:apiaccurate/logic/cubits/user_cubit.dart';
+import 'package:apiaccurate/logic/cubits/user/user_cubit.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 void main() async {

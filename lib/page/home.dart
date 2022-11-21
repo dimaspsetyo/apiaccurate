@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:apiaccurate/models/user_model.dart';
+import 'package:apiaccurate/models/city_model.dart';
 import 'package:apiaccurate/widget/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:apiaccurate/logic/cubits/user_state.dart';
-import 'package:apiaccurate/logic/cubits/user_cubit.dart';
+import 'package:apiaccurate/logic/cubits/user/user_state.dart';
+import 'package:apiaccurate/logic/cubits/user/user_cubit.dart';
 import 'package:swipe_refresh/swipe_refresh.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:apiaccurate/repo/city_repo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final CityRepository _cityModel = CityRepository();
   final _controller = StreamController<SwipeRefreshState>.broadcast();
 
   Stream<SwipeRefreshState> get _stream => _controller.stream;
@@ -29,19 +33,16 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Accurate API"),
         actions: [
           IconButton(
-            icon: const RotatedBox(
-              quarterTurns: 1,
-              child: Icon(
-                Icons.compare_arrows,
-                size: 25,
-                color: Colors.white,
-              ),
-            ),
-            // label: Text(
-            //   isDescending ? 'Descending' : 'Ascending',
-            //   style: const TextStyle(fontSize: 12, color: Colors.white),
-            // ),
+            onPressed: () {},
+            icon: const Icon(Icons.tune),
+          ),
+          IconButton(
             onPressed: () => setState(() => isDescending = !isDescending),
+            icon: const Icon(
+              Icons.sort_by_alpha,
+              size: 25,
+              color: Colors.white,
+            ),
           ),
           IconButton(
             onPressed: () {
@@ -72,6 +73,23 @@ class _HomePageState extends State<HomePage> {
             if (state is UserLoadedState) {
               return Column(
                 children: [
+                  DropdownSearch<CityModel>(
+                    asyncItems: (String? query) => _cityModel.getcityList(),
+                    popupProps: PopupPropsMultiSelection.modalBottomSheet(
+                      showSelectedItems: true,
+                      itemBuilder: _customPopupItemBuilderExample2,
+                      showSearchBox: true,
+                    ),
+                    compareFn: (item, sItem) => item.id == sItem.id,
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        labelText: 'Filter City',
+                        filled: true,
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: buildUserListView(state.users),
                   ),
@@ -183,5 +201,31 @@ class _HomePageState extends State<HomePage> {
     await Future<void>.delayed(const Duration(seconds: 3));
     // when all needed is done change state
     _controller.sink.add(SwipeRefreshState.hidden);
+  }
+
+  Widget _customPopupItemBuilderExample2(
+    BuildContext context,
+    CityModel? item,
+    bool isSelected,
+  ) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: !isSelected
+          ? null
+          : BoxDecoration(
+              border: Border.all(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+      child: ListTile(
+        selected: isSelected,
+        title: Text(item?.name ?? ''),
+        subtitle: Text(item?.id?.toString() ?? ''),
+        leading: const CircleAvatar(
+            // this does not work - throws 404 error
+            // backgroundImage: NetworkImage(item.avatar ?? ''),
+            ),
+      ),
+    );
   }
 }
